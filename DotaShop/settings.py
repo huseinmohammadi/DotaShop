@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'orders',
     'otp',
     'referral',
+    'bank_account'
 ]
 
 MIDDLEWARE = [
@@ -204,7 +205,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-# AUTH_USER_MODEL = "user.User"
+AUTH_USER_MODEL = "user.User"
 
 USE_X_FORWARDED_HOST = True
 
