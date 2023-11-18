@@ -9,3 +9,15 @@ class User(AbstractUser):
     national_code = models.CharField(max_length=50, null=True, blank=True)
     father_name = models.CharField(max_length=100, null=True, blank=True)
     birth_date = models.DateTimeField(null=True, blank=True)
+
+    @staticmethod
+    def get_user_by_id(pk):
+        try:
+            return User.objects.get(id=pk)
+        except User.DoesNotExist:
+            return None
+
+    @staticmethod
+    def admin_set_password(data, password) -> None:
+        data.set_password(password)
+        data.save()
