@@ -34,10 +34,9 @@ class UserAdminSerializer(serializers.ModelSerializer):
 
 
 class UserAdminUpdateSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(required=False)
 
     class Meta:
         model = User
-        exclude = ['user_permissions', 'groups', 'date_joined', 'last_login', 'username']
+        exclude = ['user_permissions', 'groups', 'date_joined', 'last_login', 'username', 'password', 'phone_number']
 
 

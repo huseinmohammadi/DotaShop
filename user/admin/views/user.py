@@ -3,9 +3,7 @@ from rest_framework import generics, status
 from rest_framework.permissions import *
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
-from user.admin.serializers import UserAdminListSerializer, UserAdminFilters, UserAdminSerializer, \
-    UserAdminUpdateSerializer
+from user.admin.serializers import *
 from user.models import User
 from utils.api_pagination import Pagination
 
@@ -34,7 +32,7 @@ class UserCreate(APIView):
         del request.data['password']
         if serializer.is_valid():
             data = serializer.save()
-            User.admin_set_password(data, password)
+            User.hash_set_password(data, password)
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -52,11 +50,8 @@ class UserUpdate(APIView):
     def put(self, request, pk):
         user = get_user_objects(pk)
         serializer = UserAdminUpdateSerializer(user, data=request.data)
-        password = request.data['password']
-        del request.data['password']
         if serializer.is_valid():
             serializer.save()
-            User.admin_set_password(user, password)
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
