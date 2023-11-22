@@ -26,7 +26,7 @@ class User(AbstractUser):
         context['refresh'] = str(refresh)
         context['access'] = str(refresh.access_token)
         context['message'] = 'Login was successful'
-        context['is_admin'] = True if self.is_superuser else False
+        context['is_admin'] = self.is_superuser
         return context
 
     @staticmethod
