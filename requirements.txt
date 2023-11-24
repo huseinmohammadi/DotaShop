@@ -8,3 +8,5 @@ drf-yasg==1.21.4
 django-filter==22.1
 psycopg2-binary==2.9.5
 django-mptt
+pillow
+captcha
